@@ -22,7 +22,7 @@ You can find the detailed assignment in the separate file:
    HOST_PORT=
 
    DATABASE_PORT=5432
-   DATABASE_HOST=
+   DATABASE_HOST=db
    DATABASE_USER=
    DATABASE_PASSWORD=
    DATABASE_NAME=
