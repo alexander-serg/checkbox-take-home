@@ -50,20 +50,6 @@ async def client():
         yield ac
 
 
-# # @pytest.fixture
-# # def identity_headers(account, user):
-# #     return {
-# #         'X-Account-ID': str(account.id),
-# #         'X-User-ID': str(user.id)
-# #     }
-
-
-# # @pytest.fixture
-# # async def reseted_payment_method(db_session, account):
-# #     account.active_payment = False
-# #     await db_session.commit()
-
-
 @pytest.fixture
 def user_data():
     profile = fake.simple_profile()

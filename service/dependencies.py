@@ -39,7 +39,6 @@ async def get_user_from_form(
 
 async def validate_access_token(
     request: Request,
-    token: Annotated[str | None, Depends(oauth2_scheme)]
 ) -> str:
     token = await oauth2_scheme(request)
     if not token:

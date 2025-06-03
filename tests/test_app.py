@@ -75,8 +75,7 @@ class TestCheckCreate:
 
     async def test_validation_error(self, client, headers, check_data, subtests):
         with subtests.test(msg='test_products_not_found'):
-            payload = {'products': check_data['products'], 'payment': check_data['payment']}
-            payload['products'] = []
+            payload = {'products': [], 'payment': check_data['payment']}
             response = await client.post('/checks/', json=jsonable_encoder(payload), headers=headers)
             print(response.content)
             assert response.status_code == 422
@@ -193,7 +192,7 @@ class TestCheckList:
 
 class TestCheckView:
     async def test_view_check(self, client, existing_check, subtests):
-        with subtests.test('test_standart_view'):
+        with subtests.test('test_standard_view'):
             response = await client.get(f'/checks/{existing_check.public_id}/view')
             assert response.status_code == 200
             assert response.text == STANDART_CHECK.format(

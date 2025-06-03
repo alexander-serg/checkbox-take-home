@@ -1,11 +1,11 @@
 import uuid
 
 from typing import Any
-from dataclasses import asdict, is_dataclass
+from dataclasses import is_dataclass
 from baseconv import base62
 from decimal import Decimal, ROUND_HALF_UP
 
-from fastapi import HTTPException, Request, Response, status
+from fastapi import HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 from fastapi.routing import run_endpoint_function as original_run_endpoint_function
 from fastapi.dependencies.models import Dependant
@@ -31,7 +31,7 @@ def verify_password(password, password_hash) -> bool:
     return password_hasher.verify(password, password_hash)
 
 
-def quantize_money(value: Decimal) -> Decimal:
+def quantize_money(value: Decimal | int) -> Decimal:
     return value.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
 

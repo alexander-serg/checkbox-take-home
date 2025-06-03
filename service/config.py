@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 
 class Settings(BaseSettings):
-    host_url: Annotated[HttpUrl, UrlConstraints(host_required=True)] = Field(default=...)
+    host_url: Annotated[HttpUrl, UrlConstraints(host_required=True), Field(default=...)]
     host_port: PositiveInt = Field(default=...)
 
     auth_secret_key: str = Field(default=...)  # hint: openssl rand -hex 32

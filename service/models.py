@@ -3,7 +3,7 @@ import datetime
 from typing import Sequence, Self, cast, get_args
 from decimal import Decimal
 
-from sqlalchemy import ForeignKey, select, func, Select, and_, \
+from sqlalchemy import ForeignKey, select, Select, and_, \
     Numeric, Index, CHAR, String, Enum, func
 from sqlalchemy.sql import ColumnExpressionArgument
 from sqlalchemy.sql.operators import eq, asc_op, desc_op, ge, le, OperatorType
@@ -60,7 +60,10 @@ class Check(Base):
     __tablename__ = "checks"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    public_id: Mapped[str] = mapped_column(CHAR(25), unique=True, index=True, default=lambda: f'ch_{generate_base62uuid()}')
+    public_id: Mapped[str] = mapped_column(
+        CHAR(25), unique=True, index=True,
+        default=lambda: f'ch_{generate_base62uuid()}'
+    )
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), index=True)
     total: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     rest: Mapped[Decimal] = mapped_column(Numeric(12, 2))
