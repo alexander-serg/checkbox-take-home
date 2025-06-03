@@ -1,5 +1,10 @@
 # Checkbox Service
 
+## Assignment
+
+You can find the detailed assignment in the separate file:  
+[Assignment.docx](Assignment.docx)
+
 ## Requirements
 
 - Docker Compose version **>= v2.30**  
