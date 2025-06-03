@@ -1,0 +1,54 @@
+version: 1
+disable_existing_loggers: False
+formatters:
+  uvicorn-default:
+    "()": uvicorn.logging.DefaultFormatter
+    format: >-
+      %(levelprefix)s [%(asctime)s.%(msecs)-3d] - %(message)s
+    use_colors: true
+    datefmt: '%d-%m-%y %H:%M:%S'
+  uvicorn-access:
+    "()": service.logger.UvicornAccessFormatter
+    format: >-
+      %(levelprefix)s [%(asctime)s.%(msecs)-3d] [%(request_id)-36s] 
+      [%(method)-6s] [%(path)-10s] %(bind_params)s - %(status_code)s
+    use_colors: true
+    datefmt: '%d-%m-%y %H:%M:%S'
+  service:
+    "()": service.logger.InjectingFormatter
+    format: >-
+      %(levelprefix)s [%(asctime)s.%(msecs)-3d] [%(request_id)-36s] 
+      [%(method)-6s] [%(path)-10s] %(bind_params)s - %(message)s
+    use_colors: true
+    datefmt: '%d-%m-%y %H:%M:%S'
+handlers:
+  uvicorn-default:
+    formatter: uvicorn-default
+    class: logging.StreamHandler
+    stream: ext://sys.stderr
+  uvicorn-access:
+    formatter: uvicorn-access
+    class: logging.StreamHandler
+    stream: ext://sys.stdout
+  service:
+    formatter: service
+    class: logging.StreamHandler
+    stream: ext://sys.stderr
+loggers:
+  uvicorn:
+    level: INFO
+    handlers:
+      - uvicorn-default
+    propagate: no
+  uvicorn.error:
+    level: INFO
+  uvicorn.access:
+    level: INFO
+    handlers:
+      - uvicorn-access
+    propagate: no
+  service:
+    level: DEBUG
+    handlers:
+      - service
+    propagate: no
