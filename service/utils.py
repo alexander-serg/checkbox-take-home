@@ -31,7 +31,7 @@ def verify_password(password, password_hash) -> bool:
     return password_hasher.verify(password, password_hash)
 
 
-def quantize_money(value: Decimal | int) -> Decimal:
+def quantize_money(value: Decimal) -> Decimal:
     return value.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
 

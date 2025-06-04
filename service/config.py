@@ -1,13 +1,13 @@
-from typing import Any, Annotated
+from typing import Any
 
-from pydantic import Field, HttpUrl, PositiveInt, UrlConstraints
+from pydantic import Field, HttpUrl, PositiveInt
 from pydantic_settings import BaseSettings
 from sqlalchemy import URL
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 
 class Settings(BaseSettings):
-    host_url: Annotated[HttpUrl, UrlConstraints(host_required=True), Field(default=...)]
+    host_url: HttpUrl = Field(default=...)
     host_port: PositiveInt = Field(default=...)
 
     auth_secret_key: str = Field(default=...)  # hint: openssl rand -hex 32
